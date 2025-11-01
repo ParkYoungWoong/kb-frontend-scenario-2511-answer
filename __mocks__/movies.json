@@ -1,0 +1,76 @@
+{
+  "Search": [
+    {
+      "Title": "Frozen",
+      "Year": "2013",
+      "imdbID": "tt2294629",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Frozen II",
+      "Year": "2019",
+      "imdbID": "tt4520988",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BZTE1YjlmZjctNjIwNi00NDQ0LTlmMzgtYWZkY2RkZTMwNTdmXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Ghostbusters: Frozen Empire",
+      "Year": "2024",
+      "imdbID": "tt21235248",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BNjcwMWQ4NTktODU5OC00NzBjLTg0Y2MtZTRjNDkzMjZmOTE4XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Frozen",
+      "Year": "2010",
+      "imdbID": "tt1323045",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTc5MTg0ODgxMF5BMl5BanBnXkFtZTcwODEzOTYwMw@@._V1_SX300.jpg"
+    },
+    {
+      "Title": "The Frozen Ground",
+      "Year": "2013",
+      "imdbID": "tt2005374",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BYjBhMDdiNzEtNTdjMS00ZTBkLWI2NWQtMzk0YjFiODRlYTgxXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Frozen Planet",
+      "Year": "2011–2012",
+      "imdbID": "tt2092588",
+      "Type": "series",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMDE0ZTZlZDItOTgzNS00Zjg4LWEwOWEtYjc1YzY2MjliZTM5XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Frozen River",
+      "Year": "2008",
+      "imdbID": "tt0978759",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTk2NjMwMDgzNF5BMl5BanBnXkFtZTcwMDY0NDY3MQ@@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Frozen Fever",
+      "Year": "2015",
+      "imdbID": "tt4007502",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTNmNTU0ZjQtOTMwMC00NGVjLWJmNTgtZTIyYmQwNTI0NzY2XkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Olaf's Frozen Adventure",
+      "Year": "2017",
+      "imdbID": "tt5452780",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMzRlNWU1NjMtMTY3ZC00MmQxLTk0YWEtNzcxNzI3NjFhNDQzXkEyXkFqcGc@._V1_SX300.jpg"
+    },
+    {
+      "Title": "Frozen Stiff",
+      "Year": "2002",
+      "imdbID": "tt0301634",
+      "Type": "movie",
+      "Poster": "https://m.media-amazon.com/images/M/MV5BMTk5NDc0MjU3Nl5BMl5BanBnXkFtZTcwNDc3NTU3OQ@@._V1_SX300.jpg"
+    }
+  ],
+  "totalResults": "395",
+  "Response": "True"
+}
