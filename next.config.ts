@@ -1,3 +1,4 @@
+import { withSentryConfig } from '@sentry/nextjs'
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
@@ -9,4 +10,12 @@ const nextConfig: NextConfig = {
   }
 }
 
-export default nextConfig
+export default withSentryConfig(nextConfig, {
+  org: 'heropy',
+  project: 'parkyoungwoong-movie-app',
+  silent: !process.env.CI,
+  widenClientFileUpload: true,
+  tunnelRoute: '/monitoring',
+  disableLogger: true,
+  automaticVercelMonitors: true
+})

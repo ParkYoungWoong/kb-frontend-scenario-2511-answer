@@ -42,27 +42,20 @@ export interface DetailedMovie {
   Response: string
 }
 
-const defaultMessage = 'Search for the movie title!'
+// 외부에서 초기화할 수 있도록 팩토리 함수로 정의
+export const getInitialState = () => ({
+  inputText: '',
+  searchText: '',
+  message: 'Search for the movie title!'
+})
 
 export const useMoviesStore = create(
-  combine(
-    {
-      inputText: '',
-      searchText: '',
-      message: defaultMessage
-    },
-    set => ({
-      setInputText: (text: string) => set({ inputText: text }),
-      setSearchText: (text: string) => set({ searchText: text }),
-      setMessage: (message: string) => set({ message }),
-      resetMovies: () =>
-        set({
-          inputText: '',
-          searchText: '',
-          message: defaultMessage
-        })
-    })
-  )
+  combine(getInitialState(), set => ({
+    setInputText: (text: string) => set({ inputText: text }),
+    setSearchText: (text: string) => set({ searchText: text }),
+    setMessage: (message: string) => set({ message }),
+    resetMovies: () => set(getInitialState())
+  }))
 )
 
 export function useMovies() {

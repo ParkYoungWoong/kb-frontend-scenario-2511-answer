@@ -1,5 +1,98 @@
 # KB국민은행 바이트디그리 과정 과제
 
+## 최종 과제
+
+2025년 11월 21일까지 제출합니다.
+
+## 요구사항
+
+아래의 단위 테스트, 실시간 오류 모니터링, Git & GitHub 활용, Vercel 배포 요구사항을 충족시켜야 합니다.
+최종으로 완성된 과제 프로젝트의 GitHub 원격 저장소와 Vercel 배포 주소를 제출합니다.
+
+### 1. 단위 테스트
+
+- `npm test` 명령으로 실행하는 모든 단위 테스트 시나리오가 통과해야 합니다.
+- `npm run test:coverage` 명령으로 측정하는 모든 파일의 단위 테스트 커버리지가 80% 이상이어야 합니다.
+- 아래 테스트 시나리오 대신 주어진 컴포넌트에 맞게 자신만의 테스트 시나리오를 추가해도 좋습니다.
+
+#### MovieItem
+
+- `/__tests__/components/MovieItem.test.tsx` 파일에서 테스트를 작성합니다.
+- 다음 시나리오들을 테스트합니다.
+  - 영화 아이템이 정상적으로 렌더링된다
+  - 영화 제목과 연도가 올바르게 표시된다
+  - 영화 포스터 이미지가 올바른 속성으로 렌더링된다
+  - 영화 상세 페이지로 이동하는 링크가 올바른 href를 가진다
+  - 포스터 보기 버튼을 클릭하면 포스터 페이지로 이동한다
+
+#### MovieList
+
+- `/__tests__/components/MovieList.test.tsx` 파일에서 테스트를 작성합니다.
+- 다음 시나리오들을 테스트합니다.
+  - 영화 목록이 정상적으로 렌더링된다
+  - 영화 목록이 비어있고 메시지가 있을 때 메시지가 표시된다
+  - 영화 목록이 있을 때는 메시지가 표시되지 않는다
+  - 영화 목록이 undefined일 때 메시지가 표시된다
+
+#### SearchBar
+
+- `/__tests__/components/SearchBar.test.tsx` 파일에서 테스트를 작성합니다.
+- 다음 시나리오들을 테스트합니다.
+  - 검색 바가 정상적으로 렌더링된다
+  - 입력 필드에 텍스트를 입력하면 setInputText가 호출된다
+  - Reset 버튼을 클릭하면 resetMovies가 호출된다
+  - form 제출 시 setSearchText가 호출된다
+  - isFetching이 true일 때 Search 버튼에 로딩 상태가 표시된다
+  - Search 버튼은 submit 타입이다
+
+#### Movies API
+
+- `/api/movies/route.ts` 파일에서 테스트를 작성합니다.
+- 다음 시나리오들을 테스트합니다.
+  - title 파라미터로 OMDB API를 호출하고 응답을 반환한다
+  - API_KEY가 환경변수에서 올바르게 사용된다
+
+#### Movies Hooks
+
+- `/__tests__/hooks/movies.test.tsx` 파일에서 테스트를 작성합니다.
+- 다음 시나리오들을 테스트합니다.
+  - useMoviesStore
+    - setInputText가 inputText를 업데이트한다
+    - setSearchText가 searchText를 업데이트한다
+    - setMessage가 message를 업데이트한다
+    - resetMovies가 모든 상태를 초기화한다
+  - useMovies
+    - searchText가 비어있을 때 빈 배열을 반환한다
+    - searchText가 있을 때 API를 호출하고 영화 목록을 반환한다
+    - API가 False Response를 반환할 때 에러를 던진다
+    - 공백만 있는 searchText는 빈 배열을 반환한다
+    - isFetching이 로딩 상태를 올바르게 반영한다
+
+### 2. 실시간 오류 모니터링 도구
+
+Sentry를 활용하여 실시간 오류 모니터링을 구현합니다.
+
+- [Sentry](https://sentry.io/) 서비스에 가입(무료)합니다.
+- 과제 프로젝트에 [Sentry SDK를 설치](https://docs.sentry.io/platforms/javascript/guides/nextjs/)합니다.
+- Sentry 프로젝트 이름에 자신의 영어 이름을 포함합니다.(예: `parkyoungwoong-movie-app`)
+- 샘플 에러를 발생시켜 Sentry에 전송합니다.
+- Sentry Dashboard / Issues 페이지에서 확인한 샘플 에러를 스크린샷으로 촬영합니다.
+- 스크린샷을 과제 프로젝트의 `public` 폴더에 첨부합니다.
+
+![Sentry 예제 에러](./public/sentry-error-sample.jpg)
+
+### 3. Git & GitHub 활용
+
+- 모든 코드 변경 사항은 Git & GitHub를 활용하여 관리합니다.
+- GitHub 원격 저장소를 공개(Public)로 생성하고 완성한 최종 과제 프로젝트를 업로드(Push)한 후 저장소 주소를 제출합니다.
+
+### 4. Vercel 배포
+
+- [Vercel](https://vercel.com/) 서비스에 가입(무료)합니다.
+- GitHub 원격 저장소에 업로드한 과제 프로젝트를 Vercel로 가져와 배포합니다.
+- 환경변수를 지정해 실제로 영화를 검색할 수 있어야 합니다.
+- 배포된 과제 프로젝트의 Vercel 주소를 제출합니다.
+
 ## 중간 과제
 
 2025년 10월 24일까지 제출합니다.
@@ -26,57 +119,3 @@
 - 쿼리 실패 시 재시도(`retry`) 횟수를 1번으로 설정합니다.
 - 무한 스크롤 기능을 위해 `useInfiniteQuery`를 사용합니다.
 - 패칭 데이터의 `Response` 속성이 `False`인 경우, 함께 포함된 `Error` 속성의 값을 에러 메시지로 표시합니다.
-
-### 2. 컴포넌트 단위 테스트 추가
-
-- `npm test` 명령으로 실행하는 모든 단위 테스트 시나리오가 통과해야 합니다.
-- `npm run test:coverage` 명령으로 측정하는 모든 파일의 단위 테스트 커버리지가 80% 이상이어야 합니다.
-- 아래 테스트 시나리오 대신 주어진 컴포넌트에 맞게 자신만의 테스트 시나리오를 추가해도 좋습니다.
-
-#### `<Button>`
-
-- `/__tests__/components/Button.test.tsx` 파일에서 테스트를 작성합니다.
-- 다음 시나리오들을 테스트합니다.
-  - 기본 버튼이 정상적으로 렌더링된다
-  - children props이 정상적으로 표시된다
-  - color prop이 없을 때 기본 스타일이 적용된다
-  - loading 상태일 때 Loader 컴포넌트가 표시된다
-  - loading 상태일 때 Loader에 올바른 props가 전달된다
-  - loading 상태일 때 children이 숨겨진다
-  - loading이 false일 때 children이 표시되고 Loader는 숨겨진다
-  - onClick 이벤트 핸들러가 올바르게 동작한다
-  - color prop이 올바르게 적용된다
-
-#### `<Header>`
-
-- `/__tests__/components/Header.test.tsx` 파일에서 테스트를 작성합니다.
-- 다음 시나리오들을 테스트합니다.
-  - 헤더가 정상적으로 렌더링된다
-  - 메뉴 항목들이 정상적으로 렌더링된다
-  - 현재 경로가 "/"일 때 Search 메뉴가 활성화된다
-  - 현재 경로가 "/movies/tt4520988"일 때 Sample Movie 메뉴가 활성화된다
-  - 알 수 없는 경로일 때 모든 메뉴가 비활성화된다
-
-#### `<Headline>`
-
-- `/__tests__/components/Headline.test.tsx` 파일에서 테스트를 작성합니다.
-- 다음 시나리오들을 테스트합니다.
-  - Headline 컴포넌트가 정상적으로 렌더링된다
-  - 메인 제목이 정상적으로 렌더링된다
-
-#### `<Loader>`
-
-- `/__tests__/components/Loader.test.tsx` 파일에서 테스트를 작성합니다.
-- 다음 시나리오들을 테스트합니다.
-  - 기본 컴포넌트가 정상적으로 렌더링된다
-  - size props를 사용하지 않으면 기본 크기가 적용된다
-  - size props를 사용하면 해당 크기가 적용된다
-  - color props를 사용하지 않으면 기본 색상이 적용된다
-  - color props를 사용하면 해당 색상이 적용된다
-  - loading props가 false일 때 렌더링되지 않는다
-  - loading props가 true일 때 렌더링된다
-
-### 3. Git & GitHub 활용
-
-- 모든 코드 변경 사항은 Git & GitHub를 활용하여 관리합니다.
-- GitHub 원격 저장소를 공개(Public)로 생성하고 완성한 중간 과제 프로젝트를 업로드(Push)한 후 저장소 주소를 제출합니다.
