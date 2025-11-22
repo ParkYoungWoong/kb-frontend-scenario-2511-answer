@@ -66,7 +66,7 @@
     - API가 False Response를 반환할 때 에러를 던진다
     - 공백만 있는 searchText는 빈 배열을 반환한다
     - isFetching이 로딩 상태를 올바르게 반영한다
-   
+
 #### 테스트 추가(선택 및 가산점)
 
 - Playwright 혹은 Cypress 등의 도구를 활용해 E2E 테스트를 환경을 구성합니다.

@@ -1,0 +1,120 @@
+name: CI Workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  OMDB_API_KEY: ${{ secrets.OMDB_API_KEY }}
+
+jobs:
+  # 단위 테스트
+  unit-test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 체크아웃
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: 의존성 설치
+        run: npm ci
+      - name: 단위 테스트 실행
+        run: npm run test:coverage
+      - name: 테스트 커버리지 결과 업로드
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+  # 빌드 테스트
+  build-test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 체크아웃
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: 의존성 설치
+        run: npm ci
+      - name: 프로덕션 빌드 테스트
+        run: npm run build
+      - name: 빌드 결과를 아티팩트로 업로드
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+          retention-days: 7
+  # E2E 테스트
+  e2e-test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 체크아웃
+        uses: actions/checkout@v4
+      - name: Node.js 설정
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: 의존성 설치
+        run: npm ci
+
+      # Playwright 캐시
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+      - name: Playwright 브라우저 설치
+        run: npx playwright install --with-deps chromium
+      - name: Playwright 테스트 실행
+        run: npm run test:e2e
+      - name: Playwright 테스트 결과를 아티팩트로 업로드
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report-${{ github.sha }}
+          path: playwright-report/
+          retention-days: 7
+  # 실패 알림
+  notify-slack-failure:
+    needs: [unit-test, build-test, e2e-test]
+    runs-on: ubuntu-latest
+    if: failure()
+    steps:
+      - name: 슬랙 알림 (테스트 실패)
+        uses: 8398a7/action-slack@v3
+        with:
+          status: failure
+          fields: repo,commit,author,ref,workflow,job,took
+          text: |
+            테스트가 실패했습니다! 😱
+            확인이 필요합니다.
+  # 성공 알림
+  notify-slack-success:
+    needs: [unit-test, build-test, e2e-test]
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+      - name: 슬랙 알림 (테스트 성공)
+        uses: 8398a7/action-slack@v3
+        with:
+          status: success
+          fields: repo,commit,author,ref,workflow,job,took
+          text: |
+            모든 테스트가 성공했습니다! 🎉
+            배포 준비가 완료되었습니다.

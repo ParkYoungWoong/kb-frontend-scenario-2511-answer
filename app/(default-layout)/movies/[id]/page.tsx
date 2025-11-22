@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { notFound } from 'next/navigation'
 import { oswald } from '@/styles/fonts'
 import type { DetailedMovie } from '@/hooks/movies'
 
@@ -13,6 +14,14 @@ export async function generateMetadata({ params }: Context) {
     { cache: 'force-cache' }
   )
   const movie: DetailedMovie = await res.json()
+
+  // API 응답이 실패한 경우
+  if (movie.Response === 'False') {
+    return {
+      title: 'Movie Not Found'
+    }
+  }
+
   return {
     title: movie.Title,
     description: movie.Plot,
@@ -35,6 +44,12 @@ export default async function MovieDetail({ params }: Context) {
     { cache: 'force-cache' }
   )
   const movie: DetailedMovie = await res.json()
+
+  // API 응답이 실패한 경우 404 페이지로 이동
+  if (movie.Response === 'False') {
+    notFound()
+  }
+
   return (
     <section className="flex gap-[70px] text-white/50 max-xl:gap-[30px] max-sm:block">
       <Image
@@ -61,7 +76,7 @@ export default async function MovieDetail({ params }: Context) {
         <p className="mb-6">{movie.Plot}</p>
         <div>
           <h3 className="mt-6 mb-1.5 text-xl text-white">Ratings</h3>
-          {movie.Ratings.map(rating => (
+          {movie.Ratings?.map(rating => (
             <p key={rating.Source}>
               {rating.Source} - {rating.Value}
             </p>

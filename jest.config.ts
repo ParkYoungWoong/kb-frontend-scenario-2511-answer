@@ -13,7 +13,18 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1'
-  }
+  },
+  // e2e 테스트 제외 (Playwright 사용)
+  testPathIgnorePatterns: ['/node_modules/', '/.next/', '/e2e/'],
+  // 커버리지에서 제외할 경로
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/.next/',
+    '/e2e/',
+    '/coverage/',
+    '/playwright-report/',
+    '/test-results/'
+  ]
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
